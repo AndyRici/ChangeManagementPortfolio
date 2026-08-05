@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andressa Rici — Change Management Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio case file on change management and digital transformation adoption results."
+    />
+    <style>
+      :root {
+        --blue-deep: #0f2d52;
+        --blue: #2472a4;
+        --blue-bright: #4e8fc4;
+        --bg: #f3f5f7;
+        --card: #ffffff;
+        --line: #e1e5ea;
+        --line-strong: #cbd2d9;
+        --text: #20262e;
+        --text-soft: #5b6472;
+        --text-faint: #8a93a0;
+        --alert: #e0a339;
+        --alert-deep: #b87b1e;
+        --healthy: #6faf4e;
+        --healthy-deep: #3f7a34;
+        --font: Calibri, Candara, 'Segoe UI', Optima, Arial, sans-serif;
+        --maxw: 1280px;
+        --edge: clamp(20px, 4vw, 48px);
+        --sidebar-w: 252px;
+        --topbar-h: 66px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: var(--font);
+        font-weight: 700;
+        color: inherit;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul,
+      ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--blue);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      ::selection {
+        background: var(--blue-bright);
+        color: #fff;
+      }
+
+      .mono {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        height: var(--topbar-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 var(--edge);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar-id {
+        font-size: 0.78rem;
+        letter-spacing: 0.03em;
+        color: var(--text-soft);
+        white-space: nowrap;
+        font-weight: 600;
+      }
+
+      .topbar-id b {
+        color: var(--blue);
+        font-weight: 700;
+      }
+
+      .topbar-name {
+        text-align: right;
+        line-height: 1.25;
+        margin-left: auto;
+      }
+
+      .topbar-name .name {
+        font-weight: 700;
+        font-size: 1rem;
+        display: block;
+        color: var(--text);
+      }
+
+      .topbar-name .role {
+        font-size: 0.75rem;
+        color: var(--text-soft);
+        display: block;
+      }
+
+      .topbar-links {
+        display: flex;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+
+      .topbar-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid var(--line-strong);
+        color: var(--text-soft);
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+      }
+
+      .topbar-links a:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+        background: #eaf2f8;
+      }
+
+      .topbar-links svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .hero-banner {
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.1), transparent 40%),
+          radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.08), transparent 45%),
+          linear-gradient(115deg, var(--blue-deep) 0%, var(--blue) 75%, var(--blue-bright) 100%);
+        color: #fff;
+        padding: 56px var(--edge) 44px;
+      }
+
+      .hero-banner-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+      }
+
+      .masthead {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .avatar-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: #fff;
+      }
+
+      .masthead-name {
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #fff;
+      }
+
+      .masthead-tag {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 2px;
+      }
+
+      .masthead-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 24px 0 28px;
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.85);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .eyebrow::before {
+        content: '';
+        width: 22px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.7);
+        display: inline-block;
+      }
+
+      .hero-banner h1 {
+        font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+        line-height: 1.2;
+        max-width: 22ch;
+      }
+
+      .hero-sub {
+        margin-top: 12px;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.88);
+        max-width: 60ch;
+      }
+
+      .hero-lede {
+        margin-top: 20px;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.92);
+        max-width: 66ch;
+        line-height: 1.65;
+      }
+
+      .hero-stats {
+        max-width: var(--maxw);
+        margin: -28px auto 0;
+        padding: 0 var(--edge);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-stat {
+        flex: 1;
+        min-width: 220px;
+        background: var(--card);
+        padding: 22px 26px;
+      }
+
+      .hero-stat .num {
+        font-size: clamp(1.7rem, 3vw, 2.2rem);
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .hero-stat .num .arrow {
+        color: var(--text-faint);
+        font-weight: 400;
+        margin: 0 0.18em;
+      }
+
+      .hero-stat .num .b {
+        color: var(--alert-deep);
+      }
+
+      .hero-stat .num .a {
+        color: var(--healthy-deep);
+      }
+
+      .hero-stat .lbl {
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: var(--text-soft);
+      }
+
+      .shell {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: var(--sidebar-w) 1fr;
+        gap: 0;
+        padding-top: 56px;
+      }
+
+      .chapters {
+        position: sticky;
+        top: calc(var(--topbar-h) + 24px);
+        align-self: start;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 4px 20px 40px 0;
+      }
+
+      .chapters a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-soft);
+        transition: background 0.18s, color 0.18s;
+      }
+
+      .chapters a .num {
+        width: 26px;
+        height: 26px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        border: 1.5px solid var(--line-strong);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--text-faint);
+        transition: background 0.18s, color 0.18s, border-color 0.18s;
+      }
+
+      .chapters a:hover {
+        background: #eef2f5;
+      }
+
+      .chapters a.active {
+        background: var(--blue-deep);
+        color: #fff;
+      }
+
+      .chapters a.active .num {
+        background: #fff;
+        color: var(--blue-deep);
+        border-color: #fff;
+      }
+
+      .chapters .nav-divider {
+        height: 1px;
+        background: var(--line);
+        margin: 10px 14px;
+      }
+
+      .chapters a.for-recruiters {
+        color: var(--alert-deep);
+      }
+
+      .chapters a.for-recruiters .num {
+        border-color: var(--alert);
+        color: var(--alert-deep);
+      }
+
+      .chapters a.for-recruiters.active {
+        background: var(--alert-deep);
+        color: #fff;
+      }
+
+      .chapters a.for-recruiters.active .num {
+        background: #fff;
+        color: var(--alert-deep);
+        border-color: #fff;
+      }
+
+      .content {
+        padding: 4px var(--edge) 40px 28px;
+        min-width: 0;
+      }
+
+      .chapter {
+        scroll-margin-top: 84px;
+        margin-bottom: 28px;
+      }
+
+      .section-card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(15, 45, 82, 0.04);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .section-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-header-bar {
+        background: linear-gradient(90deg, var(--blue-deep), var(--blue));
+        color: #fff;
+        padding: 16px 40px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+
+      .section-header-bar .num {
+        font-size: 1.5rem;
+        font-weight: 700;
+        opacity: 0.85;
+        letter-spacing: 0;
+      }
+
+      .section-body {
+        padding: 30px 40px 36px;
+      }
+
+      .chapter-kicker {
+        font-size: 1.02rem;
+        color: var(--blue);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 14px;
+      }
+
+      .chapter-lede {
+        max-width: 72ch;
+        font-size: 0.98rem;
+        color: var(--text);
+        margin-bottom: 14px;
+        line-height: 1.65;
+      }
+
+      .chapter-lede.soft {
+        color: var(--text-soft);
+      }
+
+      .context-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 4px 0 4px;
+      }
+
+      .context-list li {
+        position: relative;
+        padding-left: 22px;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: var(--text);
+        max-width: 72ch;
+      }
+
+      .context-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 9px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--blue);
+      }
+
+      .context-list b {
+        font-weight: 700;
+      }
+
+      .stat-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin: 6px 0 26px;
+      }
+
+      .stat-tile {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 150px;
+      }
+
+      .stat-num {
+        font-weight: 700;
+        font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+        line-height: 1;
+        color: var(--blue-deep);
+      }
+
+      .stat-num .plus {
+        color: var(--blue-deep);
+      }
+
+      .stat-num .b {
+        color: var(--alert-deep);
+      }
+
+      .stat-num .a {
+        color: var(--healthy-deep);
+      }
+
+      .stat-num .arrow {
+        color: var(--text-faint);
+        font-weight: 400;
+        margin: 0 0.12em;
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        max-width: 26ch;
+      }
+
+      .findings {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin: 8px 0 8px;
+      }
+
+      .findings li {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px 18px 16px 36px;
+        font-size: 0.92rem;
+        color: var(--text);
+        position: relative;
+        line-height: 1.5;
+      }
+
+      .findings li::before {
+        content: '';
+        position: absolute;
+        left: 16px;
+        top: 19px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--alert);
+      }
+
+      .chart-block {
+        margin: 26px 0 4px;
+      }
+
+      .chart-label {
+        font-size: 1.05rem;
+        color: var(--text);
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: minmax(160px, 300px) 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .bar-row:last-child {
+        border-bottom: none;
+      }
+
+      .bar-stmt {
+        font-size: 0.86rem;
+        color: var(--text-soft);
+      }
+
+      .bar-track {
+        position: relative;
+        height: 9px;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 0%;
+        border-radius: 99px;
+        transition: width 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+      }
+
+      .bar-fill.alert {
+        background: var(--alert);
+      }
+
+      .bar-fill.healthy {
+        background: var(--healthy);
+      }
+
+      .bar-fill.neutral {
+        background: var(--blue-bright);
+      }
+
+      .bar-val {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .bar-num {
+        font-weight: 700;
+        min-width: 3ch;
+        text-align: right;
+        color: var(--text);
+      }
+
+      .bar-max {
+        font-weight: 400;
+        font-size: 0.8em;
+        color: var(--text-faint);
+        margin-left: 1px;
+      }
+
+      .flag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--alert-deep);
+        border: 1px solid var(--alert);
+        background: #fcf3e3;
+        padding: 2px 8px;
+        border-radius: 20px;
+      }
+
+      .flag::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--alert);
+      }
+
+      .flag-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--alert);
+        border: 1px solid var(--alert-deep);
+        vertical-align: middle;
+        cursor: default;
+      }
+
+      .chart-caption {
+        font-size: 0.82rem;
+        color: var(--text-faint);
+        margin-top: 14px;
+        max-width: 64ch;
+      }
+
+      .chart-caption .legend-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--alert);
+        margin: 0 2px 0 8px;
+      }
+
+      .quotes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin: 20px 0 4px;
+      }
+
+      .quote-card {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--alert);
+        border-radius: 8px;
+        padding: 18px 20px;
+      }
+
+      .quote-card.healthy {
+        border-left-color: var(--healthy);
+      }
+
+      .quote-text {
+        font-style: italic;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--text);
+      }
+
+      .plan-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin: 4px 0 4px;
+        counter-reset: plan;
+      }
+
+      .plan-item {
+        display: flex;
+        gap: 14px;
+        align-items: baseline;
+      }
+
+      .plan-item .plan-num {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--blue-deep);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        margin-top: 2px;
+      }
+
+      .plan-item p {
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: var(--text);
+        max-width: 72ch;
+      }
+
+      .plan-item p b {
+        color: var(--blue-deep);
+        font-weight: 700;
+      }
+
+      .adopt-block {
+        margin: 24px 0 4px;
+        max-width: 640px;
+      }
+
+      .adopt-track {
+        position: relative;
+        height: 12px;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        margin: 30px 0 10px;
+      }
+
+      .adopt-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 0%;
+        background: var(--healthy);
+        border-radius: 99px;
+        transition: width 0.8s cubic-bezier(0.2, 0.7, 0.3, 1);
+      }
+
+      .adopt-marker {
+        position: absolute;
+        top: -9px;
+        width: 2px;
+        height: 30px;
+        background: var(--alert-deep);
+        left: 0%;
+      }
+
+      .adopt-marker .tag {
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: var(--alert-deep);
+        white-space: nowrap;
+      }
+
+      .adopt-ends {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        font-weight: 600;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .tag {
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid var(--line-strong);
+        color: var(--text-soft);
+        background: var(--bg);
+        padding: 8px 14px;
+        border-radius: 99px;
+      }
+
+      footer {
+        padding: 48px var(--edge) 40px;
+        border-top: 1px solid var(--line);
+        margin-top: 20px;
+        max-width: var(--maxw);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .footer-grid {
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+        flex-wrap: wrap;
+      }
+
+      .footer-name {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--text);
+      }
+
+      .footer-role {
+        font-size: 0.8rem;
+        color: var(--text-soft);
+        margin-top: 4px;
+      }
+
+      .footer-note {
+        max-width: 48ch;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        margin-top: 14px;
+        line-height: 1.6;
+      }
+
+      .footer-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid var(--line-strong);
+        padding: 11px 18px;
+        border-radius: 99px;
+        color: var(--text);
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+      }
+
+      .contact-btn:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+        background: #eaf2f8;
+      }
+
+      .contact-btn svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+
+      .footer-bottom {
+        margin-top: 36px;
+        font-size: 0.75rem;
+        color: var(--text-faint);
+      }
+
+      [data-editable] {
+        transition: background 0.15s;
+      }
+
+      body.editing [data-editable] {
+        outline: 1px dashed var(--alert-deep);
+        outline-offset: 3px;
+        border-radius: 2px;
+        cursor: text;
+      }
+
+      body.editing [data-editable]:hover {
+        background: rgba(224, 163, 57, 0.1);
+      }
+
+      body.editing [data-editable]:focus {
+        outline: 2px solid var(--healthy-deep);
+        background: rgba(111, 175, 78, 0.1);
+      }
+
+      .edit-toggle {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--text);
+        background: var(--card);
+        border: 1px solid var(--line-strong);
+        padding: 11px 16px;
+        border-radius: 99px;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(15, 45, 82, 0.16);
+      }
+
+      .edit-toggle:hover {
+        border-color: var(--blue);
+      }
+
+      .edit-toggle.on {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+
+      .edit-toggle svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .edit-panel {
+        position: fixed;
+        right: 20px;
+        bottom: 70px;
+        z-index: 50;
+        max-width: 250px;
+        font-size: 0.76rem;
+        line-height: 1.5;
+        color: var(--text-soft);
+        background: var(--card);
+        border: 1px solid var(--line-strong);
+        padding: 14px 16px;
+        border-radius: 8px;
+        display: none;
+        box-shadow: 0 8px 24px rgba(15, 45, 82, 0.16);
+      }
+
+      .edit-panel.show {
+        display: block;
+      }
+
+      .edit-panel button {
+        margin-top: 10px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: var(--alert-deep);
+        background: none;
+        border: 1px solid var(--line-strong);
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .edit-panel button:hover {
+        border-color: var(--alert-deep);
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          grid-template-columns: 1fr;
+          padding-top: 0;
+        }
+
+        .chapters {
+          position: sticky;
+          top: var(--topbar-h);
+          height: auto;
+          flex-direction: row;
+          overflow-x: auto;
+          overflow-y: hidden;
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(8px);
+          border-bottom: 1px solid var(--line);
+          padding: 8px var(--edge);
+          gap: 6px;
+          scrollbar-width: none;
+        }
+
+        .chapters::-webkit-scrollbar {
+          display: none;
+        }
+
+        .chapters a {
+          white-space: nowrap;
+          padding: 8px 12px;
+        }
+
+        .chapters .nav-divider {
+          display: none;
+        }
+
+        .content {
+          padding: 24px var(--edge) 40px;
+        }
+
+        .hero-stats {
+          margin-top: -20px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .findings {
+          grid-template-columns: 1fr;
+        }
+
+        .quotes {
+          grid-template-columns: 1fr;
+        }
+
+        .section-body {
+          padding: 24px 22px 30px;
+        }
+
+        .section-header-bar {
+          padding: 14px 22px;
+        }
+
+        .topbar-name {
+          display: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        * {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-id">CASE FILE — <b>OCM/01</b></div>
+      <div class="topbar-name">
+        <span class="name">Andressa Rici</span>
+        <span class="role">Change Manager · AI &amp; Digital Transformation Adoption</span>
+      </div>
+      <div class="topbar-links">
+        <a href="https://www.linkedin.com/in/andressa-rici/" target="_blank" rel="noopener" aria-label="LinkedIn" title="linkedin.com/in/andressa-rici">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <header class="hero-banner">
+      <div class="hero-banner-inner">
+        <div class="masthead">
+          <div class="avatar-badge" id="avatarBadge" title="">AR</div>
+          <div>
+            <div class="masthead-name">Andressa Rici — Portfolio</div>
+            <div class="masthead-tag">Change Management · AI &amp; Digital Transformation Adoption</div>
+          </div>
+        </div>
+        <div class="masthead-divider"></div>
+        <p class="eyebrow">Case file 01 — Change management</p>
+        <h1>Change Analysis, Actions and Results</h1>
+        <p class="hero-sub">Projects A and B · Hypercare to Sustainment, May–October 2024</p>
+        <p class="hero-lede">After go-live, the ADKAR training score for both projects was 1.9 out of 5. This case file shows how I identified the causes, proposed an action plan, and worked with the project team to bring this score to an average of 4.4.</p>
+      </div>
+    </header>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num"><span class="b" data-key="adkar-3">1.9</span><span class="arrow">→</span><span class="a" data-key="adkar-avg-after">4.4</span></div>
+        <div class="lbl">ADKAR training score, before and after reinforcement</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num"><span class="b" data-key="adopt-before">40</span>%<span class="arrow">→</span><span class="a" data-key="adopt-after">90</span>%</div>
+        <div class="lbl">usage of the new systems, in three months</div>
+      </div>
+    </div>
+
+    <div class="shell">
+      <nav class="chapters" aria-label="Case file sections">
+        <a href="#situation"><span class="num">01</span>Situation</a>
+        <a href="#diagnosis"><span class="num">02</span>Diagnosis</a>
+        <a href="#rootcause"><span class="num">03</span>Root Cause</a>
+        <a href="#treatment"><span class="num">04</span>Treatment Plan</a>
+        <a href="#intervention"><span class="num">05</span>Intervention</a>
+        <a href="#outcome"><span class="num">06</span>Outcome</a>
+        <div class="nav-divider"></div>
+        <a href="#recruiters" class="for-recruiters"><span class="num">i</span>For Recruiters</a>
+      </nav>
+
+      <main class="content">
+        <section id="situation" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar"><span class="num">01</span>Situation</div>
+            <div class="section-body">
+              <p class="chapter-kicker">Context</p>
+              <ul class="context-list">
+                <li data-editable data-key="ctx-1"><b>Context:</b> Projects A and B went live in May 2024.</li>
+                <li data-editable data-key="ctx-2">I joined the project in June 2024 as Organization Change Management (OCM) Lead.</li>
+                <li data-editable data-key="ctx-3">First action after understanding the scenario, as OCM Lead: I started meetings with leadership from the impacted areas, to assess adoption and usage.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="diagnosis" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar"><span class="num">02</span>Diagnosing Adoption Gaps with Impacted Areas</div>
+            <div class="section-body">
+              <div class="stat-row">
+                <div class="stat-tile">
+                  <span class="stat-num"><span data-key="meetings-leadership" data-editable>20</span></span>
+                  <span class="stat-label">meetings with leadership from impacted areas</span>
+                </div>
+              </div>
+
+              <p class="chapter-lede" data-editable data-key="diagnosis-intro">Scenario identified for both projects during hypercare:</p>
+              <ul class="findings">
+                <li data-editable data-key="finding-1">High risk of business errors, rework and customer impact</li>
+                <li data-editable data-key="finding-2">Difficulty using the new systems</li>
+                <li data-editable data-key="finding-3">Trainings didn't reflect real operational scenarios</li>
+                <li data-editable data-key="finding-4">Frequent bugs that made the system unusable for day-to-day activities</li>
+                <li data-editable data-key="finding-5">Several issues required workarounds, which often failed</li>
+                <li data-editable data-key="finding-6">System instability impacted both suppliers and end customers</li>
+              </ul>
+
+              <div class="chart-block">
+                <p class="chart-label">ADKAR Assessment Results — Leaders' Perspective (Post Go-Live)</p>
+
+                <div class="bar-row">
+                  <span class="bar-stmt">My team understands what the change is</span>
+                  <div class="bar-track"><div class="bar-fill neutral" data-source="adkar-1" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="adkar-1" data-key="adkar-1" data-editable>4.1</span><span class="bar-max">/5</span></div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-stmt">My team has embraced the change</span>
+                  <div class="bar-track"><div class="bar-fill neutral" data-source="adkar-2" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="adkar-2" data-key="adkar-2" data-editable>4.1</span><span class="bar-max">/5</span></div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-stmt">My team was trained to ensure the success of the project <span class="flag">Barrier point</span></span>
+                  <div class="bar-track"><div class="bar-fill alert" data-source="adkar-3" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="adkar-3" data-key="adkar-3" data-editable>1.9</span><span class="bar-max">/5</span></div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-stmt">My team feels fully capable of performing project activities <span class="flag-dot" title="Barrier point" aria-label="Barrier point"></span></span>
+                  <div class="bar-track"><div class="bar-fill alert" data-source="adkar-4" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="adkar-4" data-key="adkar-4" data-editable>2.5</span><span class="bar-max">/5</span></div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-stmt">I see my team as a multiplier of the project's success</span>
+                  <div class="bar-track"><div class="bar-fill neutral" data-source="adkar-5" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="adkar-5" data-key="adkar-5" data-editable>3.7</span><span class="bar-max">/5</span></div>
+                </div>
+
+                <p class="chart-caption">Scale from 1 to 5. <span class="legend-dot"></span>Barrier point — the two statements below the line: training and capability. That's where I focused first.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="rootcause" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar"><span class="num">03</span>Root Cause</div>
+            <div class="section-body">
+              <p class="chapter-kicker">Captured feedback during interviews with impacted areas</p>
+
+              <div class="quotes">
+                <div class="quote-card">
+                  <p class="quote-text" data-editable data-key="quote-rc-1">There was no clear communication when the process was implemented. There was no structure for escalations or testing.</p>
+                </div>
+                <div class="quote-card">
+                  <p class="quote-text" data-editable data-key="quote-rc-2">We need to present the process, along with a communication plan, timeline, and dedicated training for each team.</p>
+                </div>
+                <div class="quote-card">
+                  <p class="quote-text" data-editable data-key="quote-rc-3">The process must be properly mapped, tested, and corrected before go-live.</p>
+                </div>
+                <div class="quote-card">
+                  <p class="quote-text" data-editable data-key="quote-rc-4">The system doesn't work — we feel like we're just completing tasks to check a box.</p>
+                </div>
+              </div>
+
+              <p class="chapter-lede soft" style="margin-top:20px;" data-editable data-key="rootcause-close">These comments helped me understand what was missing before go-live: clear communication, structured testing, and dedicated training for each team.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="treatment" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar"><span class="num">04</span>My Proposed Actions as Change Management Lead</div>
+            <div class="section-body">
+              <ol class="plan-list">
+                <li class="plan-item"><span class="plan-num">1</span><p data-editable data-key="plan-1">Clarify the process flow and what has already been implemented, including next key deliverables. <b>Responsible: Project Team</b></p></li>
+                <li class="plan-item"><span class="plan-num">2</span><p data-editable data-key="plan-2">Identify and address the problems raised by each area. <b>Responsible: Project Team</b></p></li>
+                <li class="plan-item"><span class="plan-num">3</span><p data-editable data-key="plan-3">Based on the findings, reinforce training sessions to improve process understanding. <b>Responsible: OCM (structure) + Project Team (apply)</b></p></li>
+                <li class="plan-item"><span class="plan-num">4</span><p data-editable data-key="plan-4">Reinforce key communications and guidance for bug reporting. <b>Responsible: OCM</b></p></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section id="intervention" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar"><span class="num">05</span>Strategic Alignment — Training Reinforcement Plan Execution</div>
+            <div class="section-body">
+              <div class="stat-row">
+                <div class="stat-tile">
+                  <span class="stat-num"><span data-key="meetings-strategic" data-editable>8</span></span>
+                  <span class="stat-label">strategic alignment meetings, OCM and Project Team</span>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-num"><span data-key="sessions-training" data-editable>17</span></span>
+                  <span class="stat-label">reinforcement training sessions delivered</span>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-num"><span class="plus">+</span><span data-key="users-retrained" data-editable>200</span></span>
+                  <span class="stat-label">retrained end users</span>
+                </div>
+              </div>
+
+              <p class="chapter-lede" data-editable data-key="intervention-body">The project team worked closely with the impacted users to clarify processes and resolve errors. The partnership between OCM and the project teams made it possible to create targeted trainings, focused on business scenarios for both Project A and Project B, including real use cases and flows.</p>
+
+              <div class="chart-block">
+                <p class="chart-label">Survey Results — Reactions to the Reinforcement Training</p>
+
+                <div class="bar-row">
+                  <span class="bar-stmt">The current training was more practical and applicable</span>
+                  <div class="bar-track"><div class="bar-fill healthy" data-source="survey-1" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="survey-1" data-key="survey-1" data-editable>4.3</span><span class="bar-max">/5</span></div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-stmt">This training method was more effective than previous ones I attended</span>
+                  <div class="bar-track"><div class="bar-fill healthy" data-source="survey-2" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="survey-2" data-key="survey-2" data-editable>4.5</span><span class="bar-max">/5</span></div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-stmt">I was trained and feel secure to ensure the success of the project performing project activities</span>
+                  <div class="bar-track"><div class="bar-fill healthy" data-source="survey-3" data-max="5"></div></div>
+                  <div class="bar-val"><span class="bar-num" id="survey-3" data-key="survey-3" data-editable>4.4</span><span class="bar-max">/5</span></div>
+                </div>
+                <p class="chart-caption">Scale from 1 to 5. Average between 4.3 and 4.5 — largely present. This statement reflects the two barrier points from the diagnosis (section 02) — training (<b>1.9</b>) and capability (<b>2.5</b>) — which reached <b>4.4</b> after the reinforcement plan.</p>
+              </div>
+
+              <div class="quotes" style="margin-top:28px;">
+                <div class="quote-card healthy">
+                  <p class="quote-text" data-editable data-key="quote-tr-1">Helped clarify previous gaps and enabled us to better help others.</p>
+                </div>
+                <div class="quote-card healthy">
+                  <p class="quote-text" data-editable data-key="quote-tr-2">I appreciated the clarity around system features and how to use them in my daily work.</p>
+                </div>
+                <div class="quote-card healthy">
+                  <p class="quote-text" data-editable data-key="quote-tr-3">Excellent training, with dynamic real-case exercises. The session was divided into two parts, which helped keep it engaging and not overwhelming.</p>
+                </div>
+                <div class="quote-card healthy">
+                  <p class="quote-text" data-editable data-key="quote-tr-4">The clarity of explanations and command of the subject were impressive. The proactivity in addressing our pain points made a big difference.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="outcome" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar"><span class="num">06</span>Final Considerations</div>
+            <div class="section-body">
+              <div class="stat-row">
+                <div class="stat-tile">
+                  <span class="stat-num"><span class="b" data-key="adkar-3">1.9</span><span class="arrow">→</span><span class="a" data-key="adkar-avg-after" data-editable>4.4</span></span>
+                  <span class="stat-label">"My team was trained to ensure the success of the project" — ADKAR score, before and after training reinforcement</span>
+                </div>
+              </div>
+
+              <div class="adopt-block">
+                <p class="chart-label" style="margin-bottom:0;">New-system usage, tracked over three months</p>
+                <div class="adopt-track">
+                  <div class="adopt-fill" data-source="adopt-after" data-max="100"></div>
+                  <div class="adopt-marker" data-marker="adopt-before" data-max="100">
+                    <span class="tag"><span data-key="adopt-before" data-editable>40</span>% at diagnosis</span>
+                  </div>
+                </div>
+                <div class="adopt-ends"><span>0%</span><span><span data-key="adopt-after" data-editable>90</span>% after 3 months</span></div>
+              </div>
+
+              <p class="chapter-lede" style="margin-top:30px;" data-editable data-key="outcome-close">After the proposed actions were implemented, users reported feeling more engaged and found the training more effective. OCM completed the change sustainment activities, and the projected negative ROI was reverted. <b>Three months later, help desk tickets showed that the usage of the new systems had increased from <span data-key="adopt-before">40</span>% to <span data-key="adopt-after">90</span>%.</b></p>
+            </div>
+          </div>
+        </section>
+
+        <section id="recruiters" class="chapter">
+          <div class="section-card">
+            <div class="section-header-bar" style="background:linear-gradient(90deg,var(--alert-deep),var(--alert));"><span class="num">i</span>My Background</div>
+            <div class="section-body">
+              <div class="stat-row">
+                <div class="stat-tile">
+                  <span class="stat-num"><span class="plus">12+</span></span>
+                  <span class="stat-label">years of experience in change management and program delivery</span>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-num"><span class="plus">50,000+</span></span>
+                  <span class="stat-label">users impacted across SAP and Salesforce implementations</span>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-num"><span class="plus">600+</span></span>
+                  <span class="stat-label">international assignment projects led, across multiple countries</span>
+                </div>
+              </div>
+
+              <p class="chapter-lede" data-editable data-key="recruiters-intro">I lead digital transformation initiatives across global enterprise projects, connecting business strategy, technology, and people to accelerate adoption and maximize business value. My experience spans Big Four consulting (EY and Deloitte), Prosci Consulting, and global programs supporting SAP, Salesforce, and AI-driven transformations across LATAM and North America.</p>
+
+              <p class="chapter-lede" style="margin-top:14px;" data-editable data-key="recruiters-body-1">Earlier in my career, I managed complex international mobility programs for organizations including Google, EY, Syngenta, LATAM Airlines, and Tetra Pak, strengthening my expertise in governance, stakeholder management, risk mitigation, and cross-functional program delivery.</p>
+
+              <p class="chapter-kicker" style="margin-top:24px;">Core Competencies</p>
+              <div class="tag-row" style="margin-top:0;">
+                <span class="tag">Digital Transformation</span>
+                <span class="tag">Organizational Change Management</span>
+                <span class="tag">AI Adoption</span>
+                <span class="tag">SAP</span>
+                <span class="tag">Salesforce</span>
+                <span class="tag">Project &amp; Program Management</span>
+                <span class="tag">Stakeholder Management</span>
+                <span class="tag">Executive Communication</span>
+                <span class="tag">Change Strategy</span>
+                <span class="tag">Governance</span>
+                <span class="tag">Risk Management</span>
+                <span class="tag">Training &amp; Enablement</span>
+                <span class="tag">Business Process Improvement</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-name">Andressa Rici</div>
+          <div class="footer-role">Change Manager · AI &amp; Digital Transformation Adoption</div>
+          <p class="footer-note" data-editable data-key="footer-note">Client and system names in this case file are generalized to respect confidentiality. All numbers are real, from my work on Projects A and B, 2024.</p>
+        </div>
+        <div class="footer-contact">
+          <a class="contact-btn" href="https://www.linkedin.com/in/andressa-rici/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            linkedin.com/in/andressa-rici
+          </a>
+        </div>
+      </div>
+      <p class="footer-bottom">This is a living case file. Numbers are updated as new results become available.</p>
+    </footer>
+
+    <button class="edit-toggle" id="editToggle" type="button" aria-pressed="false" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <span class="label">Edit data</span>
+    </button>
+    <div class="edit-panel" id="editPanel">
+      Editing is on. Click any underlined field and type. Changes save to <b>this browser only</b> — they won't appear on the link others see until republished.
+      <button id="resetBtn" type="button">Reset to published data</button>
+    </div>
+
+    <script>
+      (function () {
+        var STORAGE_KEY = 'ocm-case-file:data:v2';
+
+        function loadOverrides() {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          } catch (e) {
+            return {};
+          }
+        }
+
+        function saveOverrides(obj) {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+          } catch (e) {}
+        }
+
+        function applyOverrides() {
+          var overrides = loadOverrides();
+          Object.keys(overrides).forEach(function (key) {
+            document.querySelectorAll('[data-key="' + key + '"]').forEach(function (el) {
+              el.innerHTML = overrides[key];
+            });
+          });
+        }
+
+        function persistAll() {
+          var overrides = {};
+          document.querySelectorAll('[data-key]').forEach(function (el) {
+            overrides[el.getAttribute('data-key')] = el.innerHTML;
+          });
+          saveOverrides(overrides);
+        }
+
+        function propagate(key, value) {
+          document.querySelectorAll('[data-key="' + key + '"]').forEach(function (el) {
+            if (el.innerHTML !== value) el.innerHTML = value;
+          });
+        }
+
+        function getNum(key) {
+          var el = document.querySelector('[data-key="' + key + '"]');
+          if (!el) return 0;
+          var n = parseFloat(el.textContent.replace(',', '.'));
+          return isNaN(n) ? 0 : n;
+        }
+
+        function updateBars() {
+          document.querySelectorAll('.bar-fill[data-source]').forEach(function (fill) {
+            var val = getNum(fill.getAttribute('data-source'));
+            var max = parseFloat(fill.getAttribute('data-max')) || 5;
+            fill.style.width = Math.max(0, Math.min(100, (val / max) * 100)) + '%';
+          });
+
+          var adoptFill = document.querySelector('.adopt-fill');
+          if (adoptFill) {
+            var av = getNum(adoptFill.getAttribute('data-source'));
+            adoptFill.style.width = Math.max(0, Math.min(100, av)) + '%';
+          }
+
+          var marker = document.querySelector('.adopt-marker');
+          if (marker) {
+            var mv = getNum(marker.getAttribute('data-marker'));
+            marker.style.left = Math.max(0, Math.min(100, mv)) + '%';
+          }
+        }
+
+        applyOverrides();
+        updateBars();
+
+        document.querySelectorAll('[data-key]').forEach(function (el) {
+          el.addEventListener('input', function () {
+            propagate(el.getAttribute('data-key'), el.innerHTML);
+            updateBars();
+          });
+          el.addEventListener('blur', function () {
+            persistAll();
+          });
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              el.blur();
+            }
+          });
+        });
+
+        var editing = false;
+        var body = document.body;
+        var editBtn = document.getElementById('editToggle');
+        var editPanel = document.getElementById('editPanel');
+
+        var UNLOCK_KEY = 'ocm-case-file:edit-unlocked:v1';
+        if (localStorage.getItem(UNLOCK_KEY) === '1') {
+          editBtn.style.display = '';
+        }
+
+        var avatarBadge = document.getElementById('avatarBadge');
+        if (avatarBadge) {
+          var badgeClicks = 0;
+          var badgeTimer = null;
+          avatarBadge.addEventListener('click', function () {
+            badgeClicks++;
+            clearTimeout(badgeTimer);
+            badgeTimer = setTimeout(function () {
+              badgeClicks = 0;
+            }, 1200);
+            if (badgeClicks >= 3) {
+              badgeClicks = 0;
+              localStorage.setItem(UNLOCK_KEY, '1');
+              editBtn.style.display = '';
+            }
+          });
+        }
+
+        editBtn.addEventListener('click', function () {
+          editing = !editing;
+          body.classList.toggle('editing', editing);
+          editBtn.classList.toggle('on', editing);
+          editBtn.setAttribute('aria-pressed', editing ? 'true' : 'false');
+          editBtn.querySelector('.label').textContent = editing ? 'Done editing' : 'Edit data';
+          editPanel.classList.toggle('show', editing);
+          document.querySelectorAll('[data-editable]').forEach(function (el) {
+            el.setAttribute('contenteditable', editing ? 'true' : 'false');
+          });
+          if (!editing) persistAll();
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', function () {
+          localStorage.removeItem(STORAGE_KEY);
+          location.reload();
+        });
+
+        var tabs = Array.prototype.slice.call(document.querySelectorAll('.chapters a'));
+        var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+        var spyTicking = false;
+
+        function updateActiveTab() {
+          var anchorLine = 110;
+          var current = chapters[0];
+          for (var i = 0; i < chapters.length; i++) {
+            if (chapters[i].getBoundingClientRect().top <= anchorLine) current = chapters[i];
+          }
+          tabs.forEach(function (t) {
+            t.classList.remove('active');
+          });
+          var tab = current && document.querySelector('.chapters a[href="#' + current.id + '"]');
+          if (tab) tab.classList.add('active');
+          spyTicking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+          if (!spyTicking) {
+            window.requestAnimationFrame(updateActiveTab);
+            spyTicking = true;
+          }
+        }, { passive: true });
+        updateActiveTab();
+
+        if ('IntersectionObserver' in window) {
+          var cardIo = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) entry.target.classList.add('in-view');
+            });
+          }, { threshold: 0.12 });
+          document.querySelectorAll('.section-card').forEach(function (c) {
+            cardIo.observe(c);
+          });
+        } else {
+          document.querySelectorAll('.section-card').forEach(function (c) {
+            c.classList.add('in-view');
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
