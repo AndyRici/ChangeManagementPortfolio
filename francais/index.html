@@ -1,0 +1,666 @@
+<title>Cahier de français</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column, like a notebook page; inks from the class notes (violet, teal, green) mark level and feedback. */
+:root {
+  --paper: #F4F5F9; --sheet: #FFFFFF; --ink: #1D1A2C; --muted: #5D5872; --line: #DCDBE7;
+  --violet: #6A3FB5; --violet-soft: #EEE8F8;
+  --teal: #0E7478; --teal-soft: #E1F1F1;
+  --amber: #9A5600; --amber-soft: #F8ECDC;
+  --green: #1F7A3B; --green-soft: #E3F2E7;
+  --rose: #BE2E55; --rose-soft: #FAE6EB;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #14121C; --sheet: #1D1A28; --ink: #ECEAF4; --muted: #A9A4BE; --line: #34304A;
+  --violet: #B79BF2; --violet-soft: #2A2342; --teal: #5FC4C7; --teal-soft: #15302F;
+  --amber: #E6A853; --amber-soft: #36270F; --green: #6CCB86; --green-soft: #173023;
+  --rose: #F27C9B; --rose-soft: #3A1B27; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #14121C; --sheet: #1D1A28; --ink: #ECEAF4; --muted: #A9A4BE; --line: #34304A;
+  --violet: #B79BF2; --violet-soft: #2A2342; --teal: #5FC4C7; --teal-soft: #15302F;
+  --amber: #E6A853; --amber-soft: #36270F; --green: #6CCB86; --green-soft: #173023;
+  --rose: #F27C9B; --rose-soft: #3A1B27; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 17px/1.55 var(--body); }
+.wrap { max-width: 780px; margin: 0 auto; padding-block: 20px 120px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--violet); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 6vw, 2.9rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 600; }
+p { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px; }
+.top nav a { text-decoration: none; color: var(--muted); padding: 6px 10px; border-radius: 8px; font-size: 0.95rem; }
+.top nav a[aria-current="page"] { color: var(--ink); background: var(--sheet); box-shadow: inset 0 0 0 1px var(--line); }
+.sync { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); flex-basis: 100%; text-align: right; }
+.sync.cloud { color: var(--green); }
+.sync.error { color: var(--amber); }
+.count { font-family: var(--mono); font-size: 0.75rem; background: var(--rose-soft); color: var(--rose); border-radius: 99px; padding: 1px 7px; margin-left: 4px; }
+
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.intro { display: grid; gap: 10px; margin-bottom: 26px; }
+.intro p.lead { color: var(--muted); max-width: 60ch; }
+
+.levels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 26px; }
+.lvl { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; }
+.lvl b { font-family: var(--display); font-size: 1.5rem; }
+.lvl .num { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--c, var(--violet)); border-radius: 99px; transition: width .4s; }
+.A2 { --c: var(--teal); --cs: var(--teal-soft); }
+.B1 { --c: var(--violet); --cs: var(--violet-soft); }
+.B2 { --c: var(--amber); --cs: var(--amber-soft); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.chip { border: 1px solid var(--line); background: var(--sheet); border-radius: 99px; padding: 5px 14px; font-size: 0.95rem; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.shortcuts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 30px; }
+.shortcut { display: grid; gap: 2px; text-decoration: none; color: var(--ink); background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.shortcut strong { font-family: var(--display); font-size: 1.1rem; }
+.shortcut span { color: var(--muted); font-size: 0.92rem; }
+.shortcut:hover { border-color: var(--violet); }
+
+.group { display: grid; gap: 10px; margin-bottom: 30px; }
+.group h2 { display: flex; align-items: baseline; gap: 10px; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; text-decoration: none; color: var(--ink); background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.row:hover { border-color: var(--c); }
+.row .t { font-weight: 700; }
+.row .s { color: var(--muted); font-size: 0.9rem; }
+.row .p { display: grid; gap: 5px; justify-items: end; min-width: 70px; }
+.row .p .num { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.row .p .bar { width: 70px; }
+.badge { font-family: var(--mono); font-size: 0.75rem; padding: 2px 8px; border-radius: 6px; background: var(--cs); color: var(--c); font-weight: 500; }
+
+.back { display: inline-block; margin-bottom: 16px; text-decoration: none; font-size: 0.95rem; }
+.head { display: grid; gap: 8px; margin-bottom: 18px; }
+details.rappel { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px; margin-bottom: 22px; }
+details.rappel summary { cursor: pointer; padding: 10px 0; font-family: var(--display); font-weight: 600; }
+.rappel .body { display: grid; gap: 12px; padding-bottom: 16px; font-size: 0.97rem; }
+.tblwrap { overflow-x: auto; }
+.tbl { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+.tbl th, .tbl td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+.tbl th { color: var(--violet); white-space: nowrap; font-weight: 700; }
+.ordre { font-family: var(--mono); font-size: 0.85rem; background: var(--violet-soft); padding: 10px 12px; border-radius: 8px; }
+
+.consigne { font-style: italic; color: var(--muted); margin-bottom: 12px; }
+.exos { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: ex; }
+.exo { counter-increment: ex; background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; }
+.exo .q { display: flex; gap: 10px; align-items: baseline; }
+.exo .q::before { content: counter(ex); font-family: var(--mono); font-size: 0.8rem; color: var(--muted); min-width: 1.4em; font-variant-numeric: tabular-nums; }
+.exo .q .txt { min-width: 0; }
+.blank { display: inline-block; min-width: 3.2em; border-bottom: 2px solid var(--violet); margin: 0 2px; }
+.meta { font-size: 0.85rem; color: var(--muted); }
+.meta .was { color: var(--rose); text-decoration: line-through; }
+.exo.was-ok { box-shadow: inset 3px 0 0 var(--green); }
+.exo.was-ko { box-shadow: inset 3px 0 0 var(--rose); }
+
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { border: 1px solid var(--line); background: var(--paper); border-radius: 8px; padding: 6px 14px; }
+.opt:hover:not(:disabled) { border-color: var(--violet); }
+.opt.good { background: var(--green-soft); border-color: var(--green); color: var(--green); font-weight: 700; }
+.opt.bad { background: var(--rose-soft); border-color: var(--rose); color: var(--rose); text-decoration: line-through; }
+.opt:disabled { cursor: default; }
+
+.fill { display: flex; flex-wrap: wrap; gap: 8px; }
+.fill input { flex: 1 1 240px; min-width: 0; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.fill input:focus { border-color: var(--violet); outline: none; box-shadow: 0 0 0 3px var(--violet-soft); }
+.fill input.ok { border-color: var(--green); background: var(--green-soft); }
+.fill input.ko { border-color: var(--rose); }
+.btn { border: 1px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 8px; padding: 8px 16px; font-weight: 700; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); font-weight: 400; }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.fb { font-size: 0.95rem; display: grid; gap: 4px; }
+.fb:empty { display: none; }
+.fb .ok { color: var(--green); font-weight: 700; }
+.fb .ko { color: var(--rose); font-weight: 700; }
+.fb .near { color: var(--amber); font-weight: 700; }
+.fb .why { color: var(--muted); }
+.fb .ans { font-weight: 700; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--violet); text-decoration: underline; justify-self: start; }
+
+.score { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.score b { font-family: var(--display); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.confirm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.empty { background: var(--sheet); border: 1px dashed var(--line); border-radius: 12px; padding: 28px 20px; text-align: center; color: var(--muted); display: grid; gap: 6px; }
+.empty strong { color: var(--ink); font-family: var(--display); font-size: 1.15rem; }
+
+.cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.card { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
+.card .top2 { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card .tag { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-decoration: none; }
+.card .mine { color: var(--rose); }
+.card .mine s { text-decoration-thickness: 1px; }
+.card .good { color: var(--green); font-weight: 700; }
+.card .why { color: var(--muted); font-size: 0.93rem; }
+.card .lab { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em; margin-right: 6px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 20px; }
+
+.accents { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--sheet); border-top: 1px solid var(--line);
+  padding-top: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.accents .in { max-width: 780px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.accents .lbl { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-right: 4px; }
+.accents button { min-width: 36px; padding: 5px 8px; border: 1px solid var(--line); background: var(--paper); border-radius: 6px; font-size: 1rem; }
+
+@media (max-width: 560px) {
+  .levels { gap: 8px; }
+  .lvl { padding: 10px; }
+  .lvl b { font-size: 1.2rem; }
+  .lvl .eyebrow { font-size: 0.65rem; }
+  .shortcuts { grid-template-columns: 1fr; }
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row .badge { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a href="#" class="brand">Cahier de français</a>
+    <nav aria-label="Navigation">
+      <a href="#" data-nav="home">Thèmes</a>
+      <a href="#revoir" data-nav="revoir">À revoir<span class="count" id="nbRevoir" hidden></span></a>
+      <a href="#carnet" data-nav="carnet">Mon carnet</a>
+      <a href="#progres" data-nav="progres">Mes progrès</a>
+    </nav>
+    <span class="sync" id="sync" role="status"></span>
+  </header>
+  <main id="app"></main>
+</div>
+
+<div class="accents" id="accents" hidden>
+  <div class="in" id="accentKeys"><span class="lbl">Accents</span></div>
+</div>
+
+<script src="donnees.js"></script>
+<script>
+(function () {
+  var D = window.CAHIER;
+  var app = document.getElementById("app");
+  var NIVEAUX = [{ id: "A2", nom: "Survie" }, { id: "B1", nom: "Seuil" }, { id: "B2", nom: "Avancé" }];
+
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var filtre = store.get("cahier.filtre", "tous");
+
+  var carnetExos = D.carnet.map(function (e) {
+    return { q: e.q, a: [e.correct].concat(e.alt || []), why: e.why };
+  });
+
+  /* --- journal: every answer, with its date. Progress and errors are derived from it. ---
+     Saved per day in the artifact database (collection "journal", one doc per day),
+     with a copy in this browser as a fallback. */
+  var journal = store.get("cahier.journal", []);
+  var prog = {}, errs = [];
+  var db = null, syncState = "local";
+
+  function dayOf(ts) { var d = new Date(ts); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function keyOf(a) { return a.at + "|" + a.t + "|" + a.i; }
+
+  function derive() {
+    prog = {}; var last = {};
+    journal.forEach(function (a) {
+      prog[a.t] = prog[a.t] || {};
+      prog[a.t][a.i] = a.ok ? "ok" : "ko";
+      last[a.t + "|" + a.i] = a;
+    });
+    errs = [];
+    Object.keys(last).forEach(function (k) {
+      var a = last[k];
+      if (!a.ok) errs.push({ t: a.t, i: a.i, given: a.g, at: a.at });
+    });
+    errs.sort(function (x, y) { return y.at - x.at; });
+  }
+
+  var pending = {}, writing = false;
+  function flush() {
+    if (!db || writing) return;
+    var days = Object.keys(pending);
+    if (!days.length) return;
+    var day = days[0]; delete pending[day];
+    var items = journal.filter(function (a) { return dayOf(a.at) === day; });
+    writing = true;
+    db.collection("journal").doc(day).set({ date: day, attempts: items, updatedAt: Date.now() })
+      .then(function () { syncState = "cloud"; })
+      .catch(function () { pending[day] = true; syncState = "error"; })
+      .then(function () { writing = false; updateSync(); if (syncState !== "error") flush(); });
+  }
+
+  function save() { store.set("cahier.journal", journal); derive(); updateBadge(); }
+
+  function log(t, i, ok, given, mode) {
+    var a = { t: t, i: i, ok: ok, g: String(given || ""), at: Date.now(), m: mode };
+    journal.push(a);
+    save();
+    pending[dayOf(a.at)] = true;
+    flush();
+  }
+
+  function connectDb() {
+    if (!window.claude || !window.claude.use) return;
+    window.claude.use("db").then(function (d) {
+      if (!d) return;
+      db = d;
+      return db.collection("journal").get().then(function (snap) {
+        var seen = {}, merged = [];
+        snap.docs.forEach(function (doc) {
+          var data = doc.data() || {};
+          (data.attempts || []).forEach(function (a) { var k = keyOf(a); if (!seen[k]) { seen[k] = 1; merged.push(a); } });
+        });
+        journal.forEach(function (a) {
+          var k = keyOf(a);
+          if (!seen[k]) { seen[k] = 1; merged.push(a); pending[dayOf(a.at)] = true; }
+        });
+        merged.sort(function (x, y) { return x.at - y.at; });
+        journal = merged;
+        syncState = "cloud";
+        save(); updateSync(); render(); flush();
+      });
+    }).catch(function () { syncState = "error"; updateSync(); });
+  }
+  derive();
+  function theme(id) { for (var i = 0; i < D.themes.length; i++) if (D.themes[i].id === id) return D.themes[i]; return null; }
+  function exoOf(t, i) { if (t === "carnet") return carnetExos[i]; var th = theme(t); return th ? th.exercices[i] : null; }
+  function themeName(t) { if (t === "carnet") return "Mon carnet"; var th = theme(t); return th ? th.titre : t; }
+
+  function el(tag, attrs) {
+    var e = document.createElement(tag);
+    for (var k in attrs || {}) {
+      var v = attrs[k];
+      if (v == null || v === false) continue;
+      if (k === "class") e.className = v;
+      else if (k === "html") e.innerHTML = v;
+      else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v === true ? "" : v);
+    }
+    for (var j = 2; j < arguments.length; j++) add(e, arguments[j]);
+    return e;
+  }
+  function add(e, c) {
+    if (c == null || c === false) return;
+    if (Array.isArray(c)) { c.forEach(function (x) { add(e, x); }); return; }
+    e.append(c.nodeType ? c : document.createTextNode(c));
+  }
+
+  /* --- answer checking --- */
+  function norm(s) {
+    return String(s).normalize("NFC").toLowerCase()
+      .replace(/[’‘`´]/g, "'").replace(/œ/g, "oe").replace(/æ/g, "ae")
+      .replace(/[«»"“”.!?;:,…]/g, " ")
+      .replace(/\s*'\s*/g, "'").replace(/\s*-\s*/g, "-")
+      .replace(/\s+/g, " ").trim();
+  }
+  function bare(s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function check(ex, given) {
+    var g = norm(given);
+    if (!g) return "vide";
+    for (var i = 0; i < ex.a.length; i++) if (norm(ex.a[i]) === g) return "ok";
+    for (var j = 0; j < ex.a.length; j++) if (bare(norm(ex.a[j])) === bare(g)) return "near";
+    return "ko";
+  }
+
+  function stats(th) {
+    var p = prog[th.id] || {}, n = th.exercices.length, ok = 0, done = 0;
+    for (var i = 0; i < n; i++) if (p[i]) { done++; if (p[i] === "ok") ok++; }
+    return { n: n, ok: ok, done: done };
+  }
+  function bar(ratio) { var b = el("div", { class: "bar" }), i = el("i"); i.style.width = Math.round(ratio * 100) + "%"; b.append(i); return b; }
+
+  function recordFirst(t, i, ok, given, mode) { log(t, i, ok, given, mode || "theme"); }
+
+  /* --- progress over time --- */
+  function pct(a, b) { return b ? Math.round(100 * a / b) : 0; }
+  function firstAndNow(filterFn) {
+    var first = {}, now = {};
+    journal.forEach(function (a) {
+      if (!filterFn(a)) return;
+      var k = a.t + "|" + a.i;
+      if (!(k in first)) first[k] = a.ok;
+      now[k] = a.ok;
+    });
+    var ks = Object.keys(first), f = 0, n = 0;
+    ks.forEach(function (k) { if (first[k]) f++; if (now[k]) n++; });
+    return { n: ks.length, first: f, now: n };
+  }
+
+  /* --- one exercise --- */
+  function renderExo(ex, idx, ctx, meta) {
+    var li = el("li", { class: "exo" });
+    var prev = ctx.prev ? ctx.prev(idx) : null;
+    if (prev) li.classList.add(prev === "ok" ? "was-ok" : "was-ko");
+    var txt = el("span", { class: "txt" });
+    var parts = ex.q.split("___");
+    parts.forEach(function (p, k) { txt.append(p); if (k < parts.length - 1) txt.append(el("span", { class: "blank", "aria-label": "trou" })); });
+    li.append(el("div", { class: "q" }, txt));
+    if (meta) li.append(meta);
+    var fb = el("div", { class: "fb", "aria-live": "polite" });
+    var first = true, settled = false;
+
+    function explain(prefixNode) {
+      fb.replaceChildren(prefixNode);
+      if (ex.why) fb.append(el("span", { class: "why" }, ex.why));
+    }
+    function done(ok, given) {
+      if (first) { first = false; ctx.onFirst(idx, ok, given); }
+    }
+
+    if (ex.type === "choix") {
+      var opts = el("div", { class: "opts" });
+      ex.options.forEach(function (o) {
+        var b = el("button", { class: "opt", type: "button" }, o);
+        b.addEventListener("click", function () {
+          if (settled) return;
+          var ok = o === ex.a[0];
+          done(ok, o);
+          if (ok) {
+            settled = true;
+            b.classList.add("good");
+            opts.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+            explain(el("span", { class: "ok" }, "Correct !"));
+            if (ctx.onSolved) ctx.onSolved(idx);
+          } else {
+            b.classList.add("bad"); b.disabled = true;
+            explain(el("span", { class: "ko" }, "Pas encore. Essaie une autre réponse."));
+          }
+        });
+        opts.append(b);
+      });
+      li.append(opts);
+    } else {
+      var id = "in-" + ctx.key + "-" + idx;
+      var input = el("input", { id: id, type: "text", autocomplete: "off", autocapitalize: "off", spellcheck: "false", "aria-label": "Ta réponse" });
+      var go = el("button", { class: "btn", type: "submit" }, "Vérifier");
+      var form = el("form", { class: "fill" }, input, go);
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (settled) return;
+        var r = check(ex, input.value);
+        if (r === "vide") { input.focus(); return; }
+        input.classList.remove("ok", "ko");
+        if (r === "ok") {
+          settled = true; done(true, input.value);
+          input.classList.add("ok"); input.readOnly = true; go.disabled = true;
+          explain(el("span", { class: "ok" }, "Correct !"));
+          if (ctx.onSolved) ctx.onSolved(idx);
+        } else if (r === "near") {
+          explain(el("span", { class: "near" }, "Presque ! Vérifie les accents."));
+        } else {
+          done(false, input.value);
+          input.classList.add("ko");
+          var reveal = el("button", { class: "linkbtn", type: "button" }, "Voir la réponse");
+          fb.replaceChildren(el("span", { class: "ko" }, "Pas encore. Réessaie ou regarde la réponse."), reveal);
+          reveal.addEventListener("click", function () {
+            settled = true; go.disabled = true;
+            explain(el("span", {}, "Réponse : ", el("span", { class: "ans" }, ex.a[0])));
+          });
+        }
+      });
+      li.append(form);
+    }
+    li.append(fb);
+    return li;
+  }
+
+  /* --- views --- */
+  function home() {
+    var all = D.themes;
+    var intro = el("section", { class: "intro" },
+      el("span", { class: "eyebrow" }, "Objectif : niveau B2"),
+      el("h1", {}, "Cahier de français"),
+      el("p", { class: "lead" }, "Exercices du A2 au B2, construits à partir de tes notes de cours et de tes exercices corrigés. Les explications sont en portugais. Tes erreurs sont gardées dans « À revoir » pour que tu puisses les refaire.")
+    );
+
+    var levels = el("section", { class: "levels", "aria-label": "Progression par niveau" });
+    NIVEAUX.forEach(function (n) {
+      var tot = 0, ok = 0;
+      all.forEach(function (t) { if (t.niveau === n.id) { var s = stats(t); tot += s.n; ok += s.ok; } });
+      levels.append(el("div", { class: "lvl " + n.id },
+        el("span", { class: "eyebrow" }, n.nom),
+        el("b", {}, n.id),
+        bar(tot ? ok / tot : 0),
+        el("span", { class: "num" }, ok + " / " + tot + " réussis")));
+    });
+
+    var shortcuts = el("section", { class: "shortcuts" },
+      el("a", { class: "shortcut", href: "#revoir" }, el("strong", {}, "À revoir"),
+        el("span", {}, errs.length ? errs.length + " erreur" + (errs.length > 1 ? "s" : "") + " à refaire" : "Tes erreurs apparaîtront ici")),
+      el("a", { class: "shortcut", href: "#carnet" }, el("strong", {}, "Mon carnet"),
+        el("span", {}, D.carnet.length + " erreurs relevées dans tes exercices corrigés")),
+      el("a", { class: "shortcut", href: "#progres" }, el("strong", {}, "Mes progrès"),
+        el("span", {}, journal.length ? journal.length + " réponses enregistrées, par jour et par thème" : "Ton évolution, jour après jour")));
+
+    var chips = el("div", { class: "chips", role: "group", "aria-label": "Filtrer par niveau" });
+    ["tous", "A2", "B1", "B2"].forEach(function (f) {
+      chips.append(el("button", { class: "chip", type: "button", "aria-pressed": String(filtre === f),
+        onclick: function () { filtre = f; store.set("cahier.filtre", f); render(); } }, f === "tous" ? "Tous les niveaux" : f));
+    });
+
+    var groups = [];
+    NIVEAUX.forEach(function (n) {
+      if (filtre !== "tous" && filtre !== n.id) return;
+      var list = el("ul", { class: "list" });
+      all.filter(function (t) { return t.niveau === n.id; }).forEach(function (t) {
+        var s = stats(t);
+        list.append(el("li", {}, el("a", { class: "row " + t.niveau, href: "#t-" + t.id },
+          el("span", { class: "badge" }, t.niveau),
+          el("span", {}, el("div", { class: "t" }, t.titre), el("div", { class: "s" }, t.resume)),
+          el("span", { class: "p" }, el("span", { class: "num" }, s.ok + "/" + s.n), bar(s.n ? s.ok / s.n : 0)))));
+      });
+      groups.push(el("section", { class: "group " + n.id },
+        el("h2", {}, el("span", { class: "badge" }, n.id), n.nom), list));
+    });
+
+    app.replaceChildren.apply(app, [intro, levels, shortcuts, chips].concat(groups));
+  }
+
+  function themeView(th) {
+    var list = el("ol", { class: "exos" });
+    var score = el("b");
+    function refreshScore() { var s = stats(th); score.textContent = s.ok + " / " + s.n; }
+    var ctx = {
+      key: th.id,
+      prev: function (i) { return (prog[th.id] || {})[i]; },
+      onFirst: function (i, ok, given) { recordFirst(th.id, i, ok, given); refreshScore(); }
+    };
+    th.exercices.forEach(function (ex, i) { list.append(renderExo(ex, i, ctx)); });
+    refreshScore();
+
+    var redo = el("button", { class: "btn ghost", type: "button" }, "Refaire le thème");
+    redo.addEventListener("click", function () { render(); window.scrollTo(0, 0); });
+    var fn = firstAndNow(function (a) { return a.t === th.id; });
+    var footer = el("div", { class: "score" },
+      el("span", {}, "Dernier essai : ", score,
+        fn.n ? el("span", { class: "meta" }, " · premier essai " + pct(fn.first, fn.n) + " % → maintenant " + pct(fn.now, fn.n) + " %") : null),
+      redo);
+
+    app.replaceChildren(
+      el("a", { class: "back", href: "#" }, "← Tous les thèmes"),
+      el("div", { class: "head " + th.niveau }, el("span", {}, el("span", { class: "badge" }, th.niveau)), el("h1", {}, th.titre)),
+      el("details", { class: "rappel", open: true }, el("summary", {}, "Rappel de cours"), el("div", { class: "body", html: wrapTables(th.rappel) })),
+      el("p", { class: "consigne" }, th.consigne),
+      list, footer);
+  }
+  function wrapTables(html) { return html.replace(/<table/g, '<div class="tblwrap"><table').replace(/<\/table>/g, "</table></div>"); }
+
+  function revoir() {
+    var head = el("div", { class: "head" }, el("span", { class: "eyebrow" }, "Tes erreurs sur ce site"), el("h1", {}, "À revoir"));
+    var valid = errs.filter(function (e) { return exoOf(e.t, e.i); });
+    if (!valid.length) {
+      app.replaceChildren(head, el("div", { class: "empty" }, el("strong", {}, "Rien à revoir pour l'instant"),
+        el("span", {}, "Quand tu te trompes au premier essai, la question arrive ici. Réussis-la ici et elle disparaît de la liste."),
+        el("a", { href: "#" }, "Choisir un thème")));
+      return;
+    }
+    var list = el("ol", { class: "exos" });
+    valid.forEach(function (e, k) {
+      var ex = exoOf(e.t, e.i);
+      var meta = el("div", { class: "meta" }, themeName(e.t) + " · tu avais répondu ", el("span", { class: "was" }, e.given));
+      list.append(renderExo(ex, k, {
+        key: "revoir",
+        onFirst: function (_, ok, given) { log(e.t, e.i, ok, given, "revoir"); }
+      }, meta));
+    });
+    app.replaceChildren(head,
+      el("p", { class: "consigne" }, "Une question réussie du premier coup ici sort de la liste. Tout reste dans ton historique de progrès."),
+      list);
+  }
+
+  function carnet() {
+    var cards = el("ul", { class: "cards" });
+    D.carnet.forEach(function (e) {
+      var th = theme(e.theme);
+      cards.append(el("li", { class: "card" },
+        el("div", { class: "top2" },
+          el("strong", {}, e.q),
+          th ? el("a", { class: "tag", href: "#t-" + th.id }, th.niveau + " · " + th.titre) : null),
+        el("div", { class: "mine" }, el("span", { class: "lab" }, "Toi"), el("s", {}, e.mine)),
+        el("div", { class: "good" }, el("span", { class: "lab" }, "Correct"), e.correct),
+        e.why ? el("div", { class: "why" }, e.why) : null));
+    });
+    app.replaceChildren(
+      el("div", { class: "head" }, el("span", { class: "eyebrow" }, "Erreurs de tes exercices corrigés"), el("h1", {}, "Mon carnet")),
+      el("p", { class: "lead consigne" }, "Chaque erreur relevée dans tes feuilles, avec la correction et la règle. Entraîne-toi ensuite à écrire la bonne réponse sans regarder."),
+      el("div", { class: "actions" }, el("a", { class: "btn", href: "#carnet-pratique", style: "text-decoration:none" }, "S'entraîner sur le carnet")),
+      cards);
+  }
+
+  function carnetPratique() {
+    var list = el("ol", { class: "exos" });
+    var ctx = {
+      key: "carnet",
+      prev: function (i) { return (prog.carnet || {})[i]; },
+      onFirst: function (i, ok, given) { recordFirst("carnet", i, ok, given, "carnet"); }
+    };
+    carnetExos.forEach(function (ex, i) { list.append(renderExo(ex, i, ctx)); });
+    app.replaceChildren(
+      el("a", { class: "back", href: "#carnet" }, "← Mon carnet"),
+      el("div", { class: "head" }, el("span", { class: "eyebrow" }, "Mon carnet"), el("h1", {}, "S'entraîner sur mes erreurs")),
+      el("p", { class: "consigne" }, "Écris la phrase ou la forme correcte."),
+      list);
+  }
+
+  function progres() {
+    var head = el("div", { class: "head" }, el("span", { class: "eyebrow" }, "Ton historique"), el("h1", {}, "Mes progrès"));
+    if (!journal.length) {
+      app.replaceChildren(head, el("div", { class: "empty" }, el("strong", {}, "Pas encore de réponses enregistrées"),
+        el("span", {}, "Chaque réponse est enregistrée avec sa date. Ici tu verras ton taux de réussite par jour, par niveau et par thème, et la différence entre ton premier essai et aujourd'hui."),
+        el("a", { href: "#" }, "Commencer un thème")));
+      return;
+    }
+    var all = firstAndNow(function () { return true; });
+    var days = {};
+    journal.forEach(function (a) { var d = dayOf(a.at); days[d] = days[d] || { n: 0, ok: 0 }; days[d].n++; if (a.ok) days[d].ok++; });
+    var dayKeys = Object.keys(days).sort().reverse();
+
+    var tiles = el("section", { class: "levels" },
+      el("div", { class: "lvl" }, el("span", { class: "eyebrow" }, "Réponses"), el("b", {}, String(journal.length)), el("span", { class: "num" }, dayKeys.length + " jour" + (dayKeys.length > 1 ? "s" : "") + " de pratique")),
+      el("div", { class: "lvl" }, el("span", { class: "eyebrow" }, "Premier essai"), el("b", {}, pct(all.first, all.n) + " %"), el("span", { class: "num" }, all.first + " / " + all.n + " questions")),
+      el("div", { class: "lvl B1" }, el("span", { class: "eyebrow" }, "Maintenant"), el("b", {}, pct(all.now, all.n) + " %"), bar(all.n ? all.now / all.n : 0)));
+
+    function table(headers, rows) {
+      var t = el("table", { class: "tbl" }, el("tr", {}, headers.map(function (h) { return el("th", {}, h); })));
+      rows.forEach(function (r) { t.append(el("tr", {}, r.map(function (c) { return el("td", {}, c); }))); });
+      return el("div", { class: "tblwrap" }, t);
+    }
+    function delta(f, n, tot) {
+      var d = pct(n, tot) - pct(f, tot);
+      return el("span", { style: "color:var(" + (d > 0 ? "--green" : d < 0 ? "--rose" : "--muted") + ");font-weight:700" }, (d > 0 ? "+" : "") + d + " pts");
+    }
+
+    var lvlRows = NIVEAUX.map(function (n) {
+      var ids = D.themes.filter(function (t) { return t.niveau === n.id; }).map(function (t) { return t.id; });
+      var s = firstAndNow(function (a) { return ids.indexOf(a.t) >= 0; });
+      return s.n ? [n.id + " · " + n.nom, s.n + " q.", pct(s.first, s.n) + " %", pct(s.now, s.n) + " %", delta(s.first, s.now, s.n)] : null;
+    }).filter(Boolean);
+
+    var themeRows = D.themes.concat([{ id: "carnet", titre: "Mon carnet", niveau: "" }]).map(function (th) {
+      var s = firstAndNow(function (a) { return a.t === th.id; });
+      return s.n ? [el("a", { href: th.id === "carnet" ? "#carnet-pratique" : "#t-" + th.id }, th.titre), s.n + " q.", pct(s.first, s.n) + " %", pct(s.now, s.n) + " %", delta(s.first, s.now, s.n)] : null;
+    }).filter(Boolean);
+
+    var dayRows = dayKeys.slice(0, 30).map(function (d) {
+      var x = days[d], b = bar(x.ok / x.n); b.style.width = "90px";
+      return [d.split("-").reverse().join("/"), String(x.n), pct(x.ok, x.n) + " %", b];
+    });
+
+    app.replaceChildren(head,
+      el("p", { class: "consigne" }, "« Premier essai » = ta toute première réponse à chaque question. « Maintenant » = ta réponse la plus récente."),
+      tiles,
+      el("section", { class: "group" }, el("h2", {}, "Par niveau"), table(["Niveau", "Questions", "1er essai", "Maintenant", "Évolution"], lvlRows)),
+      el("section", { class: "group" }, el("h2", {}, "Par thème"), table(["Thème", "Questions", "1er essai", "Maintenant", "Évolution"], themeRows)),
+      el("section", { class: "group" }, el("h2", {}, "Par jour"), table(["Date", "Réponses", "Justes", ""], dayRows)));
+  }
+
+  function updateSync() {
+    var s = document.getElementById("sync");
+    if (!s) return;
+    s.textContent = syncState === "cloud" ? "Historique sauvegardé" : syncState === "error" ? "Sauvegarde en attente" : "Historique sur cet appareil";
+    s.className = "sync " + syncState;
+  }
+
+  /* --- accent keys --- */
+  var accents = document.getElementById("accents");
+  var keys = document.getElementById("accentKeys");
+  var lastInput = null;
+  "é è ê ë à â ç î ï ô û ù œ".split(" ").forEach(function (ch) {
+    var b = el("button", { type: "button", "aria-label": "Insérer " + ch }, ch);
+    b.addEventListener("pointerdown", function (e) { e.preventDefault(); });
+    b.addEventListener("click", function () {
+      var inp = lastInput;
+      if (!inp || inp.readOnly) return;
+      var s = inp.selectionStart != null ? inp.selectionStart : inp.value.length;
+      var en = inp.selectionEnd != null ? inp.selectionEnd : s;
+      inp.value = inp.value.slice(0, s) + ch + inp.value.slice(en);
+      inp.focus();
+      inp.setSelectionRange(s + ch.length, s + ch.length);
+    });
+    keys.append(b);
+  });
+  document.addEventListener("focusin", function (e) {
+    if (e.target.matches && e.target.matches(".fill input")) { lastInput = e.target; accents.hidden = false; }
+  });
+
+  /* --- routing --- */
+  function updateBadge() {
+    var n = document.getElementById("nbRevoir");
+    n.textContent = errs.length; n.hidden = !errs.length;
+  }
+  function render() {
+    var h = location.hash.replace(/^#/, "");
+    var nav = "home";
+    accents.hidden = true; lastInput = null;
+    if (h.indexOf("t-") === 0 && theme(h.slice(2))) { themeView(theme(h.slice(2))); nav = ""; }
+    else if (h === "revoir") { revoir(); nav = "revoir"; }
+    else if (h === "carnet") { carnet(); nav = "carnet"; }
+    else if (h === "carnet-pratique") { carnetPratique(); nav = "carnet"; }
+    else if (h === "progres") { progres(); nav = "progres"; }
+    else home();
+    document.querySelectorAll("[data-nav]").forEach(function (a) {
+      if (a.getAttribute("data-nav") === nav) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    updateBadge();
+  }
+  window.addEventListener("hashchange", function () { render(); window.scrollTo(0, 0); });
+  render();
+  updateSync();
+  connectDb();
+})();
+</script>
